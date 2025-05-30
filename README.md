@@ -1,50 +1,141 @@
-# Welcome to your Expo app 👋
+# 🛍️ Yatrika – A Modern Travel Companion App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Yatrika is a beautifully designed travel app built with **React Native** and **Expo Router**. Inspired by the diversity of Indian travel, it allows users to explore, bookmark, and plan travel destinations with ease — whether it's a cultural heritage site, nature getaway, or spiritual retreat.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
-   npm install
-   ```
+* 🔍 Browse curated travel destinations (offline supported)
+* ❤️ Bookmark destinations using `AsyncStorage`
+* 🧱 Navigate through app using Expo Router (file-based navigation)
+* 🌙 Dark-themed profile and settings screen
+* 📱 Optimized responsive UI for Android and iOS
+* 🗂 Modular and scalable component architecture
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🛠️ Tech Stack
 
-In the output, you'll find options to open the app in a
+| Tech                      | Description                          |
+| ------------------------- | ------------------------------------ |
+| React Native              | Core framework for mobile app        |
+| Expo                      | Development and build tooling        |
+| Expo Router               | File-based routing for navigation    |
+| TypeScript                | Static typing                        |
+| AsyncStorage              | Persistent local storage (bookmarks) |
+| React Native Vector Icons | Icon library for UI elements         |
+| JSON data                 | Static data source for destinations  |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🧱 Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+Yatrika/
+├── app/
+│   ├── index.tsx             # Home screen
+│   ├── (tabs)/               # Tab group screens
+|   |   └── index.tsx         # User profile/settings
+│   │   └── bookmarks.jsx     # User profile/settings
+|   |   └── profile.tsx       # User profile/settings
+│   └── listing/[id].tsx      # Dynamic listing detail page
+├── components/               # Reusable UI components
+│   └── CatergoryButtons.tsx
+│   └── GroupListings.tsx
+│   └── Listings.tsx
+│   └── SettingComponent.tsx
+├── constants/                # Theme colors, fonts
+│   └── Colors.ts
+├── data/
+│   └── destinations.json     # Static dataset
+│   └── groups.json           # Static dataset
+│   └── categories.ts         # Static categories
+├── assets/
+│   └── image/Me.jpg          # Profile image and other assets
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## 📸 Screenshots
 
-To learn more about developing your project with Expo, look at the following resources:
+> ![alt text](image.png)![alt text](image-1.png)![alt text](image-2.png)<video controls src="Yatrika.mp4" title="Title"></video>
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🔧 Getting Started
 
-## Join the community
+### Prerequisites
 
-Join our community of developers creating universal apps.
+* [Node.js](https://nodejs.org/)
+* [Expo CLI](https://docs.expo.dev/get-started/installation/)
+* Git
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Installation
+
+```bash
+git clone https://github.com/your-username/yatrika.git
+cd yatrika
+npm install
+npx expo start
+```
+
+> The app should open in Expo Go on your mobile device or emulator.
+
+---
+
+## 📦 Using the App
+
+* Open the app → Explore travel destinations
+* Tap a destination → View details
+* Tap the ❤️ icon → Add/remove bookmark (saved in local storage)
+* Open profile tab → View user settings UI
+
+---
+
+## 🦚 Local Storage with AsyncStorage
+
+Bookmarks are saved using:
+
+```ts
+import AsyncStorage from "@react-native-async-storage/async-storage";
+```
+
+Saved IDs are stored and retrieved using `getItem` and `setItem` as JSON arrays.
+
+---
+
+## 🚧 Upcoming Features
+
+* 🔐 User Authentication (OAuth + Firebase)
+* 🌐 Real-time destination feed via API
+* 🗒️ Trip planner and itinerary builder
+* 🗺️ Map view with navigation integration
+* 💬 Community tips & reviews
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -m 'Added feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Open a pull request
+
+---
+
+## 📄 License
+
+MIT License. See `LICENSE` for details.
+
+---
+
+## 📬 Contact
+
+Made with ❤️ by [Arpit Rai](mailto:arpitrai1809@gmail.com)
+Follow the project and share feedback!
+
+\#ReactNative #Expo #TypeScript #MobileApp #Yatrika #IndieDev
