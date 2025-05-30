@@ -1,75 +1,127 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React from "react";
+import { Stack } from "expo-router";
+import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { useHeaderHeight } from "@react-navigation/elements";
+import Colors from "@/constants/Colors";
+import CatergoryButtons from "@/components/CatergoryButtons";
+import Listings from "@/components/Listings";
+import GroupListings from "@/components/GroupListings";
+import ListingData from "@/data/destinations.json";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const Page = () => {
+  const headerHeight = useHeaderHeight();
 
-export default function HomeScreen() {
+  const [category , setCategory] = React.useState("All");
+
+  const onCatChanged = (category : string) =>{
+    setCategory(category);
+    // console.log("Selected Category: ", category);
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <>
+      <Stack.Screen
+        options={{
+          headerTransparent: true,
+          headerTitle: "",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => alert("Profile pressed!")}>
+              <Image
+                source={require("../../assets/images/Me.jpg")}
+                style={{
+                  width: 30,
+                  height: 30,
+                  marginLeft: 20,
+                  borderRadius: 8,
+                }}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => alert("Notifications pressed!")}>
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: 8,
+                  padding: 8,
+                  marginRight: 20,
+                  shadowColor: "#171717",
+                  shadowOffset: { width: 2, height: 4 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 5,
+                }}
+              >
+                <FontAwesome name="bell" size={24} color="#333" />
+              </View>
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <ScrollView style={[styles.container, { paddingTop: headerHeight , flex: 1 }]}>
+        <Text style={styles.headingtext}>Explore The Beautiful World!</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            marginVertical: 20,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "#fff",
+              padding: 16,
+              borderRadius: 10,
+              flex: 1,
+            }}
+          >
+            <Ionicons name="search" size={24} color="#888" style={{marginRight:15}} />
+            <TextInput placeholder="Search.." />
+          </View>
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.primaryColor,
+              padding: 12,
+              borderRadius: 10,
+              marginLeft: 20,
+            }}
+          >
+            <Ionicons name="options" size={24} color="#fff" />
+          </TouchableOpacity>
+        </View>
+
+        <CatergoryButtons onCategoryChanged = {onCatChanged} />
+
+        <Listings category={category}/>
+
+        <GroupListings />
+      </ScrollView>
+    </>
   );
-}
+};
+
+export default Page;
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  headingtext: {
+    fontSize: 28,
+    color: "#000",
+    fontWeight: "800",
+    marginTop: 20,
   },
 });

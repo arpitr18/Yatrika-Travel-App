@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "components/CatergoryButtons.jsx", "app/(tabs)/bookmarks.jsx"  ]
 }
